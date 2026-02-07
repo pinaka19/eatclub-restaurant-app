@@ -1,0 +1,1 @@
+export const RESTAURANTS_API_ENDPOINT =  "https://eccdn.com.au/misc/challengedata.json";
