@@ -6,7 +6,7 @@ const RestaurantList = ({
 }: {
   restaurants: RestaurantsResponse["restaurants"];
 }) => {
-  if (restaurants.length === 0) return <div className="grid grid-cols-12">No restaurants found.</div>;
+  if (restaurants.length === 0) return <div className="grid p-4">No restaurants found. Please change your search criteria to find other restaurants.</div>;
 
   return (
     <>
