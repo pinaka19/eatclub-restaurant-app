@@ -20,8 +20,6 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
   const hasDineIn = restaurant.deals.some((d) => d.dineIn === "true");
   const hasLightning = restaurant.deals.some((d) => d.lightning === "true");
 
-  console.log("Here");
-
   return (
     <div className="relative bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <Link to={`/restaurant/${restaurant.objectId}`}>

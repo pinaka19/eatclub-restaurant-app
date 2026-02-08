@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useMemo, useState } from "react";
 import { RestaurantsContext } from "../context/RestaurantsContext";
 import RestaurantList from "../components/RestaurantList";
+import Header from "../components/Header";
 
 export default function RestaurantListPage() {
   const { restaurants, loading, error } = useContext(RestaurantsContext);
@@ -31,6 +32,7 @@ export default function RestaurantListPage() {
 
   return (
     <div>
+      <Header />
       <div className="grid cols-12 p-4">
         <input
           type="text"
