@@ -1,17 +1,16 @@
 import { useParams } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { useContext, useMemo } from "react";
-import { RestaurantsContext } from "../context/RestaurantsContext";
-import type { Deal } from "../types/restaurant";
+import { RestaurantsContext } from "../../context/RestaurantsContext";
 import {
   PhoneArrowUpRightIcon,
   HeartIcon,
   MapPinIcon,
   DocumentPlusIcon,
   ClockIcon,
-  BoltIcon,
 } from "@heroicons/react/24/outline";
-import { FALLBACK_PLACEHOLDER_IMAGE } from "../constants";
+import { FALLBACK_PLACEHOLDER_IMAGE } from "../../constants";
+import DealItem from "./DealItem";
 
 export default function RestaurantDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -32,7 +31,6 @@ export default function RestaurantDetailPage() {
       (a, b) => parseInt(b.discount) - parseInt(a.discount),
     );
   }, [restaurant]);
-
 
   if (loading) return <div>Loading...</div>;
   if (error)
@@ -119,26 +117,3 @@ export default function RestaurantDetailPage() {
     </div>
   );
 }
-
-// Deal Item Component
-const DealItem = ({ deal }: { deal: Deal }) => (
-  <div className="deal-item flex justify-between border-b border-b-gray-300 items-center p-3">
-    <div className="deal-info">
-      <div className="flex gap-2 items-center">
-        {deal.lightning === "true" && (
-          <BoltIcon className="size-6 text-amber-400" />
-        )}
-        <p className="font-bold text-red-500"> {deal.discount}% OFF</p>
-      </div>
-      {deal.open && deal.close ? (
-        <p className="my-1 text-xs text-gray-500 font-bold">
-          Between {deal.open} - {deal.close}
-        </p>
-      ) : null}
-      <p className="text-xs text-gray-500">{deal.qtyLeft} deals available</p>
-    </div>
-    <button className="text-sm! font-bold text-red-500 border border-red-500! rounded-4xl! bg-white!">
-      Redeem
-    </button>
-  </div>
-);
