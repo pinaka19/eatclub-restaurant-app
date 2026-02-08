@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { Restaurant } from "../types/restaurant";
 import DealOverlay from "./DealOverlay";
 import { Link } from "react-router-dom";
@@ -19,11 +20,10 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
   const hasDineIn = restaurant.deals.some((d) => d.dineIn === "true");
   const hasLightning = restaurant.deals.some((d) => d.lightning === "true");
 
+  console.log("Here");
+
   return (
-    <div
-      key={restaurant.objectId}
-      className="relative bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-    >
+    <div className="relative bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <Link to={`/restaurant/${restaurant.objectId}`}>
         {/* Image */}
         <img
@@ -42,7 +42,9 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
         <div className="p-4">
           {/* Name */}
           <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold mb-1 text-black">{restaurant.name}</h2>
+            <h2 className="text-lg font-semibold mb-1 text-black">
+              {restaurant.name}
+            </h2>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -87,7 +89,9 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
               <span className="text-xs font-semibold text-black">Dine In</span>
             )}
             {hasLightning && (
-              <span className="text-xs font-semibold text-black">Order Online</span>
+              <span className="text-xs font-semibold text-black">
+                Order Online
+              </span>
             )}
           </div>
         </div>
@@ -96,4 +100,4 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
   );
 };
 
-export default RestaurantItem;
+export default memo(RestaurantItem);

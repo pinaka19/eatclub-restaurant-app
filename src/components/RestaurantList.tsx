@@ -6,14 +6,16 @@ const RestaurantList = ({
 }: {
   restaurants: RestaurantsResponse["restaurants"];
 }) => {
-  if (restaurants.length === 0) return <div>No restaurants found.</div>;
+  if (restaurants.length === 0) return <div className="grid grid-cols-12">No restaurants found.</div>;
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 p-4">
-      {restaurants.map((restaurant) => (
-        <RestaurantItem restaurant={restaurant} />
-      ))}
-    </div>
+    <>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 p-4">
+        {restaurants.map((restaurant) => (
+          <RestaurantItem restaurant={restaurant} key={restaurant.objectId} />
+        ))}
+      </div>
+    </>
   );
 };
 
