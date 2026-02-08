@@ -10,11 +10,14 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
   const { deals } = restaurant;
 
   // Find the deal with the maximum discount
-  const maxDeal = deals.reduce(
-    (prev, curr) =>
-      Number(curr.discount) > Number(prev.discount) ? curr : prev,
-    deals[0],
-  );
+  const maxDeal =
+    deals.length > 0
+      ? deals.reduce(
+          (prev, curr) =>
+            Number(curr.discount) > Number(prev.discount) ? curr : prev,
+          deals[0],
+        )
+      : null;
 
   //calculate the dineIn and lightning tags
   const hasDineIn = restaurant.deals.some((d) => d.dineIn === "true");
@@ -34,7 +37,7 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
         />
 
         {/* Discount overlay */}
-        {restaurant.deals && <DealOverlay deal={maxDeal} />}
+        {maxDeal && <DealOverlay deal={maxDeal} />}
 
         {/* Info */}
         <div className="p-4">

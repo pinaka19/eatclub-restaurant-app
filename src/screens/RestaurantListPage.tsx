@@ -33,9 +33,10 @@ export default function RestaurantListPage() {
   return (
     <div>
       <Header />
-      <div className="grid cols-12 p-4">
+      <div className="grid p-4">
         <input
           type="text"
+          name="search"
           placeholder="e.g. chinese , pizza"
           className="border border-gray-300 p-2 rounded-md"
           value={search}
