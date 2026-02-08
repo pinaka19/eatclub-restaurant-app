@@ -9,17 +9,31 @@ export default function RestaurantListPage() {
 
   const [search, setSearch] = useState("");
 
+  //Function to filter the restaurant by name or cuisine and sort the results in descending order of the discount value
   const filteredRestaurants = useMemo(() => {
     const query = search.trim().toLowerCase();
-    if (!query) return restaurants;
 
-    return restaurants.filter(({ name, cuisines }) => {
-      const matchesName = name.toLowerCase().includes(query);
-      const matchesCuisine = cuisines.some((cuisine) =>
-        cuisine.toLowerCase().includes(query),
-      );
+    // Filter if query exists, otherwise keep all restaurants
+    const filtered = !query
+      ? restaurants
+      : restaurants.filter(({ name, cuisines }) => {
+          const matchesName = name.toLowerCase().includes(query);
+          const matchesCuisine = cuisines.some((cuisine) =>
+            cuisine.toLowerCase().includes(query),
+          );
+          return matchesName || matchesCuisine;
+        });
 
-      return matchesName || matchesCuisine;
+    // Always sort by max discount descending
+    return filtered.sort((a, b) => {
+      const maxDiscountA = a.deals?.length
+        ? Math.max(...a.deals.map((d) => parseInt(d.discount)))
+        : 0;
+      const maxDiscountB = b.deals?.length
+        ? Math.max(...b.deals.map((d) => parseInt(d.discount)))
+        : 0;
+
+      return maxDiscountB - maxDiscountA; // descending
     });
   }, [search, restaurants]);
 
@@ -28,7 +42,12 @@ export default function RestaurantListPage() {
   };
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (error)
+    return (
+      <div className="flex justify-center items-center pt-3">
+        Error: {error}
+      </div>
+    );
 
   return (
     <div>
