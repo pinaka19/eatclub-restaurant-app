@@ -2,6 +2,7 @@ import { memo } from "react";
 import type { Restaurant } from "../types/restaurant";
 import DealOverlay from "./DealOverlay";
 import { Link } from "react-router-dom";
+import { FALLBACK_PLACEHOLDER_IMAGE } from "../constants";
 
 const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
   // Limit cuisines shown
@@ -32,7 +33,7 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
           alt={restaurant.name}
           className="w-full h-48 object-cover"
           onError={(e) => {
-            e.currentTarget.src = "https://placehold.co/600x400/cccccc/ffffff";
+            e.currentTarget.src = FALLBACK_PLACEHOLDER_IMAGE;
           }}
         />
 
