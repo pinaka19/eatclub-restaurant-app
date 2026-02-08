@@ -43,7 +43,7 @@ export default function RestaurantDetailPage() {
         <img
           src={restaurant.imageLink}
           alt={restaurant.name}
-          className="restaurant-image"
+          className="restaurant-image d-block m-auto"
           onError={(e) => {
             e.currentTarget.src = FALLBACK_PLACEHOLDER_IMAGE;
           }}
