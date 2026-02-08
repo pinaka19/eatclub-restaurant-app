@@ -1,11 +1,13 @@
-
+import { Route, Routes } from "react-router-dom";
+import RestaurantListPage from "./screens/RestaurantListPage";
+import RestaurantDetailPage from "./screens/RestaurantDetailPage";
 
 function App() {
-
   return (
-    <>
-      <div><h1>Restaurant Page</h1></div>
-    </>
+    <Routes>
+      <Route path="/" element={<RestaurantListPage />} />
+      <Route path="/restaurant/:id" element={<RestaurantDetailPage />} />
+    </Routes>
   );
 }
 
