@@ -16,7 +16,7 @@ import { FALLBACK_PLACEHOLDER_IMAGE } from "../constants";
 export default function RestaurantDetailPage() {
   const { id } = useParams<{ id: string }>();
 
-  const { restaurants } = useContext(RestaurantsContext);
+  const { restaurants, loading, error } = useContext(RestaurantsContext);
 
   // Find the restaurant by ID
   const restaurant = useMemo(
@@ -33,6 +33,14 @@ export default function RestaurantDetailPage() {
     );
   }, [restaurant]);
 
+
+  if (loading) return <div>Loading...</div>;
+  if (error)
+    return (
+      <div className="flex justify-center items-center pt-3">
+        Error: {error}
+      </div>
+    );
   if (!restaurant) return <h3>404 Invalid Restaurant</h3>;
 
   return (

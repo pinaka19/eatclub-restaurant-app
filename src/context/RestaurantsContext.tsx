@@ -25,8 +25,9 @@ export const RestaurantsProvider = ({ children }: { children: ReactNode }) => {
         const res = await fetch(RESTAURANTS_API_ENDPOINT);
         const data: RestaurantsResponse = await res.json();
         setRestaurants(data.restaurants ?? []);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (error) {
+        console.error(error);
+        setError("Something went wrong while fetching the data.");
       } finally {
         setLoading(false);
       }
